@@ -40,7 +40,10 @@ function App() {
           ))}
         </TextField>
 
-        <SwapHorizIcon onClick={swapCurrencies} />
+        <SwapHorizIcon 
+          fontSize="large"
+          onClick={swapCurrencies} 
+        />
 
         <TextField style={{minWidth: 150}}
           select
