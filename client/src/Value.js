@@ -15,7 +15,7 @@ const Value = ({origin, dest}) => {
 
     getQuotation(origin, dest).then((val) => {
         setValue(val);
-        setLoading(false)
+        setLoading(false);
     })
 
     return (

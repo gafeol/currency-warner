@@ -20,10 +20,6 @@ const currencies = [
         label: 'R$'
     },
     {
-        value: 'CLP',
-        label: 'Ch$'
-    },
-    {
         value: 'INR',
         label: "₹"
     }
