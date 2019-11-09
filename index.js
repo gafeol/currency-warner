@@ -13,9 +13,10 @@ if (process.env.NODE_ENV === 'production') {
   
   }
 
-mongoose.connect(keys.mongodb.dbURI, { useNewUrlParser: true, useUnifiedTopology: true }, () => {
+/*mongoose.connect(keys.mongodb.dbURI, { useNewUrlParser: true, useUnifiedTopology: true }, () => {
     console.log("connected to mongodbLab");
 });
+*/
 
 // Import home routes
 require('./routes/home.js')(app)
