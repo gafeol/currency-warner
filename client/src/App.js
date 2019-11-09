@@ -2,6 +2,8 @@ import React, {useState} from 'react';
 import './App.css';
 import Value from './Value';
 import { TextField, MenuItem, Box } from '@material-ui/core';
+import currencies from './currencyData';
+import SwapHorizIcon from '@material-ui/icons/SwapHoriz'; 
 
 
 function App() {
@@ -16,9 +18,15 @@ function App() {
     setDestCurrency(event.target.value);
   }
 
+  const swapCurrencies = () => {
+    const aux = origCurrency;
+    setOrigCurrency(destCurrency);
+    setDestCurrency(aux);
+  }
+
   return (
     <div className="App">
-      <Box display="flex" justifyContent="space-around" m={5}>
+      <Box display="flex" justifyContent="space-around" alignItems="center" m={5}>
         <TextField style={{minWidth: 150}}
           select
           value={origCurrency}
@@ -31,6 +39,8 @@ function App() {
             </MenuItem>
           ))}
         </TextField>
+
+        <SwapHorizIcon onClick={swapCurrencies} />
 
         <TextField style={{minWidth: 150}}
           select
@@ -51,27 +61,5 @@ function App() {
   );
 }
 
-const currencies = [
-  {
-    value: 'USD',
-    label: '$',
-  },
-  {
-    value: 'EUR',
-    label: '€',
-  },
-  {
-    value: 'BTC',
-    label: '฿',
-  },
-  {
-    value: 'JPY',
-    label: '¥',
-  },
-  {
-    value: 'BRL',
-    label: 'R$'
-  }
-];
 
 export default App;
