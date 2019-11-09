@@ -1,7 +1,7 @@
 const app = require('express')();
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
-const keys = require('./config/keys')
+//const keys = require('./config/keys');
 
 app.use(bodyParser.json());
 if (process.env.NODE_ENV === 'production') {
@@ -13,10 +13,11 @@ if (process.env.NODE_ENV === 'production') {
   
   }
 
-/*mongoose.connect(keys.mongodb.dbURI, { useNewUrlParser: true, useUnifiedTopology: true }, () => {
+
+mongoose.connect(process.env.dbURI, { useNewUrlParser: true, useUnifiedTopology: true }, () => {
     console.log("connected to mongodbLab");
 });
-*/
+
 
 // Import home routes
 require('./routes/home.js')(app)
