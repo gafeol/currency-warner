@@ -5,7 +5,6 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 const getQuotation = async (orig, dest) => {
     const url = `https://api.exchangeratesapi.io/latest?base=${orig}&symbols=${dest}`;
     const response = await axios.get(url);
-    console.log("RESPONSE ", JSON.stringify(response));
     return response.data.rates[dest];
 }
 

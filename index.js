@@ -2,8 +2,6 @@ const app = require('express')();
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const express = require('express');
-const nodemailer = require('nodemailer');
-//const keys = require('./config/keys');
 
 app.use(bodyParser.json());
 if (process.env.NODE_ENV === 'production') {
@@ -16,13 +14,23 @@ if (process.env.NODE_ENV === 'production') {
   }
 
 
-mongoose.connect(process.env.dbURI, { useNewUrlParser: true, useUnifiedTopology: true }, () => {
-    console.log("connected to mongodbLab");
+var dbURI = process.env.dbURI;
+if(!dbURI){
+    try{
+        const keys = require('./config/keys');
+        dbURI = keys.mongodb.dbURI;
+    }
+    catch (e) {
+        console.log("Not able to require keys file");
+    }
+}
+
+mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true }, () => {
+    console.log("Connected to mongodbLab");
 });
 
-
-// Import home routes
 require('./routes/home.js')(app)
+//app.use('/user', require('./routes/user'));
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {

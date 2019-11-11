@@ -1,14 +1,30 @@
 import React, {useState} from 'react';
 import './App.css';
 import Value from './Value';
-import { TextField, MenuItem, Box } from '@material-ui/core';
+import { TextField, MenuItem, Box, AppBar, Toolbar, Typography, Button, makeStyles } from '@material-ui/core';
 import currencies from './currencyData';
 import SwapHorizIcon from '@material-ui/icons/SwapHoriz'; 
+import { Link } from 'react-router-dom';
 
+const useStyles = makeStyles(theme => ({
+  root: {
+    flexGrow: 1,
+  },
+  menuButton: {
+    marginRight: theme.spacing(2),
+  },
+  title: {
+    flexGrow: 1,
+  },
+  link: {
+    textDecoration: 'none',
+  },
+}));
 
 function App() {
   const [origCurrency, setOrigCurrency] = useState("USD");
   const [destCurrency, setDestCurrency] = useState("BRL");
+  const classes = useStyles();
 
   const changeOrig = (event) => {
     setOrigCurrency(event.target.value);
@@ -26,6 +42,16 @@ function App() {
 
   return (
     <div className="App">
+      <AppBar position="static">
+        <Toolbar>
+          <Typography variant="h6" className={classes.title}>
+            Currency Warner
+          </Typography>
+          <Link to='/login' className={classes.link}>
+            <Button color="inherit">Login</Button>
+          </Link>
+        </Toolbar>
+      </AppBar>
       <Box display="flex" justifyContent="space-around" alignItems="center" m={5}>
         <TextField style={{minWidth: 150}}
           select
