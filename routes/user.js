@@ -1,8 +1,6 @@
+module.exports = (app) => {
+    app.post('/api/register', (req, res) => {
+        console.log("REGISTRA", req.body);
+    })
+}
 
-const app = require('express')();
-
-
-
-app.post('/register', (req, res) => {
-    console.log(req.body);
-})

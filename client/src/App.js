@@ -7,9 +7,6 @@ import SwapHorizIcon from '@material-ui/icons/SwapHoriz';
 import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles(theme => ({
-  root: {
-    flexGrow: 1,
-  },
   menuButton: {
     marginRight: theme.spacing(2),
   },
@@ -41,7 +38,7 @@ function App() {
   }
 
   return (
-    <div className="App">
+    <Box className="App" height="100%">
       <AppBar position="static">
         <Toolbar>
           <Typography variant="h6" className={classes.title}>
@@ -86,7 +83,7 @@ function App() {
       </Box>
 
       <Value mt={2} origin={origCurrency} dest={destCurrency}/>
-    </div>
+    </Box>
   );
 }
 
