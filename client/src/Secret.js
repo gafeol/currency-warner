@@ -1,35 +1,23 @@
-import React, { useState } from 'react'
-import { Typography, makeStyles } from '@material-ui/core';
-import axios from 'axios';
-import { withRouter, Link } from 'react-router-dom';
-
-const useStyles = makeStyles(theme => ({
-    form: {
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "space-around",
-    },
-    form_input: {
-        marginTop: 10,
-        marginBottom: 10,
-        minWidth: 300
-    },
-    container: {
-        display:"flex",
-        justifyContent: "center",
-        alignItems: "center",
-        marginLeft: 100,
-        marginRight: 100,
-    }
-}))
+import React from 'react'
+import { Typography, makeStyles, Box } from '@material-ui/core';
+import { withRouter } from 'react-router-dom';
+import withAuth from './withAuth';
 
 const Secret = (props) => {
+    console.log("PROPS", props)
     return (
-        <Typography variant="h3">
-            SECRET
-        </Typography> 
+        <Box>
+            <Typography variant="h3">
+                SECRET
+            </Typography>
+            <Typography>
+                Your username: {props.user.username}
+            </Typography>
+            <Typography>
+                Your email: {props.user.email}
+            </Typography>
+        </Box>
     );
 }
 
-export default withRouter(Secret);
+export default withAuth(withRouter(Secret));

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
+import axios from 'axios';
 const withAuth = (ComponentToProtect) => {
   return class extends Component {
     constructor() {
@@ -7,14 +8,15 @@ const withAuth = (ComponentToProtect) => {
       this.state = {
         loading: true,
         redirect: false,
+        user: null
       };
     }
     componentDidMount() {
-      fetch('/api/checkToken')
+      axios.get('/api/user')
         .then(res => {
-            console.log(res);
+            console.log("Resposta", res);
           if (res.status === 200) {
-            this.setState({ loading: false });
+            this.setState({ loading: false, user: res.data.user });
           } else {
             const error = new Error(res.error);
             throw error;
@@ -33,7 +35,7 @@ const withAuth = (ComponentToProtect) => {
       if (redirect) {
         return <Redirect to="/login" />;
       }
-      return <ComponentToProtect {...this.props} />;
+      return <ComponentToProtect user={this.state.user} {...this.props}/>;
     }
   }
 }

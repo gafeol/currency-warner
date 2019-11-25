@@ -30,13 +30,19 @@ module.exports = (app) => {
         })(req, res, next);
     });
 
-    app.get('/api/checkToken', ensureAuth, (req, res) => {
-        console.log("CHECA TOKEN");
-        res.sendStatus(200);
+    app.get('/api/checkToken', (req, res) => {
+        if(req.isAuthenticated())
+            res.sendStatus(200);
+        else
+            res.sendStatus(401);
+    });
+
+    app.get('/api/user', ensureAuth, (req, res) => {
+        res.json({user: req.user});
     })
 
+
     app.get('/api/logout', (req, res, next) => {
-        console.log("LOGOUT")
         req.logout();
         res.redirect('/');
     })

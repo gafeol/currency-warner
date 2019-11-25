@@ -7,7 +7,6 @@ import Register from './Register';
 import Secret from './Secret';
 import * as serviceWorker from './serviceWorker';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import withAuth from './withAuth';
 
 ReactDOM.render(
     <BrowserRouter>
@@ -18,7 +17,9 @@ ReactDOM.render(
             <Route path="/login">
                 <Login />
             </Route>
-            <Route path="/secret" component={withAuth(Secret)}/>
+            <Route path="/secret">
+                <Secret/>
+            </Route>
             <Route path="*">
                 <App />
             </Route>
