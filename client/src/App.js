@@ -14,7 +14,8 @@ const useStyles = makeStyles(theme => ({
     flexGrow: 1,
   },
   link: {
-    textDecoration: 'none',
+    textDecoration: 'inherit',
+    color: 'inherit',
   },
 }));
 
@@ -37,6 +38,21 @@ function App() {
     setDestCurrency(aux);
   }
 
+
+  const handleLogout = () =>{
+    fetch('/api/logout')
+    .then(res => {
+      if(res.status === 200){
+        console.log("Deu a chamada de logout");
+      } else {
+        console.log("deu nao");
+      }
+    })
+    .catch(err => {
+      console.log(err);
+    })
+  }
+  
   return (
     <Box className="App" height="100%">
       <AppBar position="static">
@@ -46,6 +62,13 @@ function App() {
           </Typography>
           <Link to='/login' className={classes.link}>
             <Button color="inherit">Login</Button>
+          </Link>
+          <Link to='/register' className={classes.link}>
+            <Button color="inherit">Register</Button>
+          </Link>
+          <Button color="inherit" onClick={handleLogout}>Logout</Button>
+          <Link to ='/secret' className={classes.link}>
+            <Button color="inherit">Secret</Button>
           </Link>
         </Toolbar>
       </AppBar>
@@ -81,7 +104,6 @@ function App() {
           ))}
         </TextField>
       </Box>
-
       <Value mt={2} origin={origCurrency} dest={destCurrency}/>
     </Box>
   );

@@ -1,10 +1,6 @@
 const sendgrid = require('sendgrid');
 
 module.exports = (app) => {
-    app.get('/', (req, res) => {
-        res.send("OK");
-    });
-
     app.get('/api/mail', (req, res) => {
         var helper = sendgrid.mail;
         var from_email = new helper.Email(process.env.SENDGRID_USERNAME);
@@ -23,7 +19,5 @@ module.exports = (app) => {
             console.log(response.body);
             console.log(response.headers);
           });
-
-        res.send('Mail sent!');
     });
 }

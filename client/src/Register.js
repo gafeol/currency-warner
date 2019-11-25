@@ -15,44 +15,39 @@ const useStyles = makeStyles(theme => ({
         marginBottom: 10,
         minWidth: 300
     },
-    container: {
-        display:"flex",
-        justifyContent: "center",
-        alignItems: "center",
-        marginLeft: 100,
-        marginRight: 100,
-    }
 }))
 
-const Login = (props) => {
+const Register = (props) => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState();
+    const [email, setEmail] = useState("");
     const classes = useStyles();
 
-    const handleLogin = (e) => {
+    const handleRegister = (e) => {
+        console.log("Registered");
         e.preventDefault();
 
-        axios.post("/api/login", {username, password})
+        axios.post("/api/register", { username, password, email })
             .then(res => {
-                console.log("Callback do login!");
+                console.log("Callback do register!");
                 console.log(res);
                 props.history.push('/');
             })
-            .catch(e => console.log("Erro no post do login", e))
+            .catch(e => console.log("Erro no post do registro", e))
     }
-    
+
     return (
         <Grid container direction="column" alignItems="center" justify="center" style={{ minHeight: '100vh' }}>
-            <form onSubmit={handleLogin} className={classes.form}>
+            <form onSubmit={handleRegister} className={classes.form}>
                 <Typography variant="h3">
-                    Login
-                    </Typography> 
+                    Register
+                    </Typography>
                 <TextField className={classes.form_input}
                     required
                     id="username"
-                    label="Username" 
+                    label="Username"
                     value={username}
-                    onChange={(ev) => setUsername(ev.target.value)}/>
+                    onChange={(ev) => setUsername(ev.target.value)} />
                 <TextField className={classes.form_input}
                     required
                     id="password"
@@ -60,15 +55,22 @@ const Login = (props) => {
                     value={password}
                     onChange={(ev) => setPassword(ev.target.value)}
                     type="password" />
+                <TextField className={classes.form_input}
+                    required
+                    id="email"
+                    label="Email"
+                    value={email}
+                    onChange={(ev) => setEmail(ev.target.value)}
+                    type="email" />
                 <Button type="submit"> Submit </Button>
             </form>
             <Grid item xs={6}>
-                <Link to='/register'>
-                    <Typography> Don't have an account? Click here to register!</Typography>
+                <Link to='/login'>
+                    <Typography> Already registered? Click here to login</Typography>
                 </Link>
             </Grid>
         </Grid>
     );
 }
 
-export default withRouter(Login);
+export default withRouter(Register);
