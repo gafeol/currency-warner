@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import './App.css';
+import './Home.css';
 import Value from './Value';
 import { TextField, MenuItem, Box, AppBar, Toolbar, Typography, Button, makeStyles } from '@material-ui/core';
 import currencies from './currencyData';
@@ -19,7 +19,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-function App() {
+function Home() {
   const [origCurrency, setOrigCurrency] = useState("USD");
   const [destCurrency, setDestCurrency] = useState("BRL");
   const classes = useStyles();
@@ -54,7 +54,7 @@ function App() {
   }
   
   return (
-    <Box className="App" height="100%">
+    <Box className="Home" height="100%">
       <AppBar position="static">
         <Toolbar>
           <Typography variant="h6" className={classes.title}>
@@ -110,4 +110,4 @@ function App() {
 }
 
 
-export default App;
+export default Home;

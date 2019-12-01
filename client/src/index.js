@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
+import Home from './Home';
 import Login from './Login';
 import Register from './Register';
 import Secret from './Secret';
@@ -21,7 +21,7 @@ ReactDOM.render(
                 <Secret/>
             </Route>
             <Route path="*">
-                <App />
+                <Home />
             </Route>
         </Switch>
     </BrowserRouter>
