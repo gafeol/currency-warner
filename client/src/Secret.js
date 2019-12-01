@@ -1,7 +1,7 @@
 import React from 'react'
 import { Typography, makeStyles, Box } from '@material-ui/core';
 import { withRouter } from 'react-router-dom';
-import withAuth from './withAuth';
+import { ensureAuth } from './auth';
 
 const Secret = (props) => {
     console.log("PROPS", props)
@@ -20,4 +20,4 @@ const Secret = (props) => {
     );
 }
 
-export default withAuth(withRouter(Secret));
+export default ensureAuth(withRouter(Secret));

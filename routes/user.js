@@ -32,19 +32,19 @@ module.exports = (app) => {
 
     app.get('/api/checkToken', (req, res) => {
         if(req.isAuthenticated())
-            res.sendStatus(200);
+            res.json({user: req.user});
         else
             res.sendStatus(401);
     });
 
     app.get('/api/user', ensureAuth, (req, res) => {
         res.json({user: req.user});
-    })
+    });
 
 
     app.get('/api/logout', (req, res, next) => {
         req.logout();
         res.redirect('/');
-    })
+    });
 }
 

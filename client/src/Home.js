@@ -5,6 +5,7 @@ import { TextField, MenuItem, Box, AppBar, Toolbar, Typography, Button, makeStyl
 import currencies from './currencyData';
 import SwapHorizIcon from '@material-ui/icons/SwapHoriz'; 
 import { Link } from 'react-router-dom';
+import {checkAuth} from './auth';
 
 const useStyles = makeStyles(theme => ({
   menuButton: {
@@ -19,7 +20,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-function Home() {
+function Home(props) {
   const [origCurrency, setOrigCurrency] = useState("USD");
   const [destCurrency, setDestCurrency] = useState("BRL");
   const classes = useStyles();
@@ -52,6 +53,8 @@ function Home() {
       console.log(err);
     })
   }
+
+  const {user} = props;
   
   return (
     <Box className="Home" height="100%">
@@ -60,13 +63,19 @@ function Home() {
           <Typography variant="h6" className={classes.title}>
             Currency Warner
           </Typography>
-          <Link to='/login' className={classes.link}>
-            <Button color="inherit">Login</Button>
-          </Link>
-          <Link to='/register' className={classes.link}>
-            <Button color="inherit">Register</Button>
-          </Link>
-          <Button color="inherit" onClick={handleLogout}>Logout</Button>
+          {!user &&
+            <Link to='/login' className={classes.link}>
+              <Button color="inherit">Login</Button>
+            </Link>
+          }
+          {!user && 
+            <Link to='/register' className={classes.link}>
+              <Button color="inherit">Register</Button>
+            </Link>
+          }
+          {user && 
+            <Button color="inherit" onClick={handleLogout}>Logout</Button>
+          }
           <Link to ='/secret' className={classes.link}>
             <Button color="inherit">Secret</Button>
           </Link>
@@ -110,4 +119,4 @@ function Home() {
 }
 
 
-export default Home;
+export default checkAuth(Home);
