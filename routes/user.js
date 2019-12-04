@@ -37,10 +37,20 @@ module.exports = (app) => {
             res.sendStatus(401);
     });
 
+    app.get('/api/user/rules', async (req, res) => {
+        if (req.isAuthenticated()) {
+            const { id } = req.user;
+            const user = await User.findById(id).populate('rules');
+            console.log("got rules", user.rules);
+            res.send(user.rules);
+        }
+        else
+            res.send(null);
+    })
+
     app.get('/api/user', ensureAuth, (req, res) => {
         res.json({user: req.user});
     });
-
 
     app.get('/api/logout', (req, res, next) => {
         req.logout();

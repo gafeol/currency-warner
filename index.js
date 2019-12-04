@@ -45,6 +45,7 @@ mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true }, () 
 
 require('./routes/home.js')(app)
 require('./routes/user.js')(app)
+require('./routes/rules.js')(app)
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
