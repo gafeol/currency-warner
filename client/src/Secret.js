@@ -1,5 +1,5 @@
 import React from 'react'
-import { Typography, makeStyles, Box } from '@material-ui/core';
+import { Typography, Box } from '@material-ui/core';
 import { withRouter } from 'react-router-dom';
 import { ensureAuth } from './auth';
 

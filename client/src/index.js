@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React  from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import Home from './Home';
@@ -7,7 +7,6 @@ import Register from './Register';
 import Secret from './Secret';
 import * as serviceWorker from './serviceWorker';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import axios from 'axios';
 
 const App = () => {
     return (

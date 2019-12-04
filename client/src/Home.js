@@ -6,6 +6,7 @@ import currencies from './currencyData';
 import SwapHorizIcon from '@material-ui/icons/SwapHoriz'; 
 import { Link } from 'react-router-dom';
 import {checkAuth} from './auth';
+import Rules from './Rules';
 
 const useStyles = makeStyles(theme => ({
   menuButton: {
@@ -114,6 +115,7 @@ function Home(props) {
         </TextField>
       </Box>
       <Value mt={2} origin={origCurrency} dest={destCurrency}/>
+      <Rules/>
     </Box>
   );
 }
