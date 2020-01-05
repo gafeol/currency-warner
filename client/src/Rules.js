@@ -1,49 +1,96 @@
-import React, {useState} from 'react';
-import {Grid, TextField, MenuItem, Button} from '@material-ui/core';
+import React, { useState, useEffect } from 'react';
+import { Box, TextField, MenuItem, Button, Typography } from '@material-ui/core';
 import axios from 'axios';
-import currencies from './currencyData'
+import currencies from './currencyData';
+import { checkAuth } from './auth';
 
-const Rules = (props) => {
+const style = {
+    TextField: {
+        minWidth: 150,
+        margin: 8
+    }
+}
+
+const Rules = ({user}) => {
     const [origCurr, setOrigCurr] = useState("USD");
     const [destCurr, setDestCurr] = useState("BRL");
+    const [thresholdValue, setThreshold] = useState(0);
+    const [rules, setRules] = useState(null);
+
+    useEffect(() => {
+        if (rules === null) {
+            axios.get("/api/rules")
+                .then(res => {
+                    setRules(res.data);
+                })
+                .catch(err => console.log("Erro pegando rules ", err));
+        }
+    })
 
     const handleRuleCreation = () => {
-        axios.post('/api/rule', )
-        // TODO: Continuar colocando a request pra criacao de regra
+        axios.post('/api/rules', {
+            user: user._id,
+            origCurr: origCurr,
+            destCurr: destCurr,
+            thresholdValue: thresholdValue
+        }).then(res => {
+            console.log("Callback deu res ", res);
+        }).catch(err => console.log("Erro na criacao ", err));
+        //Issue: TODO: Quando o usuario nao ta logado a aplicacao nao faz nada
+        // Nao cai em nenhum catch ou then, nem redireciona pro login
     }
+
     return (
-        <Grid container>
-            <form onSubmit={handleRuleCreation}>
-                <TextField style={{minWidth: 150}}
-                    select
-                    id="origCurr"
-                    label="Original Currency"
-                    value={origCurr}
-                    onChange={(ev)=>setOrigCurr(ev.target.value)}>
-                        {currencies.map(option => (
-                            <MenuItem key={option.value} value={option.value}>
-                                {option.label}
-                            </MenuItem>
-                        ))}
-                    </TextField>
-                <TextField style={{ minWidth: 150 }}
-                    select
-                    id="destCurr"
-                    label="Destination Currency"
-                    value={destCurr}
-                    onChange={ev => setDestCurr(ev.target.value)}>
-                    {currencies.map(option => (
-                        <MenuItem key={option.value} value={option.value}>
-                            {option.label}
-                        </MenuItem>
-                    ))}
-                </TextField>
-                <Button type="submit">
-                    Submit
+        <Box>
+            <Box>
+                <Typography variant="h4">
+                    Rules for {user ? user.username : "no one"}
+                </Typography>
+                <form onSubmit={handleRuleCreation}>
+                    <Box>
+                        <TextField style={style.TextField}
+                            select
+                            id="origCurr"
+                            label="Original Currency"
+                            value={origCurr}
+                            onChange={(ev) => setOrigCurr(ev.target.value)}>
+                            {currencies.map(option => (
+                                <MenuItem key={option.value} value={option.value}>
+                                    {option.label}
+                                </MenuItem>
+                            ))}
+                        </TextField>
+                        <TextField style={style.TextField}
+                            id="thresholdValue"
+                            label="warn me when it is less than:"
+                            type={Number}
+                            onChange={ev => setThreshold(ev.target.value)}>
+
+                        </TextField>
+                        <TextField style={style.TextField}
+                            select
+                            id="destCurr"
+                            label="Destination Currency"
+                            value={destCurr}
+                            onChange={ev => setDestCurr(ev.target.value)}>
+                            {currencies.map(option => (
+                                <MenuItem key={option.value} value={option.value}>
+                                    {option.label}
+                                </MenuItem>
+                            ))}
+                        </TextField>
+                    </Box>
+                    <Button type="submit">
+                        Submit
                 </Button>
-            </form>
-        </Grid>
+                </form>
+            </Box>
+            <Box>
+                {JSON.stringify(rules)}
+                {/* TODO: Melhorar esta pourra de ui */}
+            </Box>
+        </Box>
     );
 }
 
-export default Rules;
+export default checkAuth(Rules);
