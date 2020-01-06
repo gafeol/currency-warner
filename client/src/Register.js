@@ -24,7 +24,6 @@ const Register = (props) => {
     const classes = useStyles();
 
     const handleRegister = (e) => {
-        console.log("Registered");
         e.preventDefault();
 
         axios.post("/api/register", { username, password, email })
