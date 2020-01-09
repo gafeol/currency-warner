@@ -8,6 +8,11 @@ const { ensureAuth } = require('./config/auth');
 
 require('./config/passport')(passport);
 
+
+require('./routes/home.js')(app)
+require('./routes/user.js')(app)
+require('./routes/rules.js')(app)
+
 if (process.env.NODE_ENV === 'production') {
     app.use(express.static('client/build'));
     const path = require('path');
@@ -43,10 +48,6 @@ if(!dbURI){
 mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true }, () => {
     console.log("Connected to mongodbLab");
 });
-
-require('./routes/home.js')(app)
-require('./routes/user.js')(app)
-require('./routes/rules.js')(app)
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
