@@ -9,8 +9,8 @@ const { ensureAuth } = require('./config/auth');
 require('./config/passport')(passport);
 
 app.use(bodyParser.json());
-if (process.env.NODE_ENV === 'production' || process.env.NODE_ENV == 'staging') {
-    app.use(express.static(__dirname + 'client/build'));
+if (process.env.NODE_ENV === 'production') {
+    app.use(express.static('client/build'));
     const path = require('path');
     app.get('*', (req, res) => {
         res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
