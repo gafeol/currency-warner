@@ -10,6 +10,12 @@ require('./config/passport')(passport);
 
 
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
+app.get('/bla', (req, res) => {
+    res.send("ALOU");
+});
+
 require('./routes/home.js')(app)
 require('./routes/user.js')(app)
 require('./routes/rules.js')(app)

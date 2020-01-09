@@ -5,6 +5,7 @@ const { ensureAuth } = require('../config/auth');
 
 module.exports = (app) => {
     app.post('/api/register', (req, res) => {
+        console.log("Vai registrar usuario")
         const newUser = new User({
             username: req.body.username,
             email: req.body.email,
@@ -26,7 +27,7 @@ module.exports = (app) => {
         passport.authenticate('local', {
             successRedirect: '/',
             failureMessage: '/login',
-            failureFlash: true
+            //failureFlash: true
         })(req, res, next);
     });
 
