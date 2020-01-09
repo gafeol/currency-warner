@@ -9,6 +9,7 @@ const { ensureAuth } = require('./config/auth');
 require('./config/passport')(passport);
 
 
+app.use(bodyParser.json());
 require('./routes/home.js')(app)
 require('./routes/user.js')(app)
 require('./routes/rules.js')(app)
@@ -32,7 +33,6 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use(bodyParser.json());
 
 var dbURI = process.env.dbURI;
 if(!dbURI){
