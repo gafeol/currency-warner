@@ -8,7 +8,6 @@ const { ensureAuth } = require('./config/auth');
 
 require('./config/passport')(passport);
 
-app.use(bodyParser.json());
 if (process.env.NODE_ENV === 'production') {
     app.use(express.static('client/build'));
     const path = require('path');
@@ -27,6 +26,8 @@ app.use(session({
 // Passport middleware
 app.use(passport.initialize());
 app.use(passport.session());
+
+app.use(bodyParser.json());
 
 var dbURI = process.env.dbURI;
 if(!dbURI){
