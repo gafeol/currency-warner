@@ -9,26 +9,23 @@ const { ensureAuth } = require('./config/auth');
 require('./config/passport')(passport);
 
 
+// Express session
+app.use(session({
+    secret: 'papa',
+    resave: true,
+    saveUninitialized: true
+}));
+
+// Passport middleware
+app.use(passport.initialize());
+app.use(passport.session());
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get('/bla', (req, res) => {
     res.send("ALOU");
 });
-
-const Rule = require('./models/Rule');
-app.get('/api/rules', (req, res) => {
-    console.log("Pegando rules...");
-    Rule.find({}).
-        populate('user').
-        exec((err, rules) => {
-            console.log("executou com ", err, rules)
-            if (err)
-                throw err;
-            console.log("got rules", rules);
-            res.send(rules);
-        });
-})
 
 require('./routes/home.js')(app)
 require('./routes/user.js')(app)
@@ -41,17 +38,6 @@ if (process.env.NODE_ENV === 'production') {
         res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
     })
 }
-
-// Express session
-app.use(session({
-    secret: 'papa',
-    resave: true,
-    saveUninitialized: true
-}));
-
-// Passport middleware
-app.use(passport.initialize());
-app.use(passport.session());
 
 
 var dbURI = process.env.dbURI;
