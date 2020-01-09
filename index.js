@@ -16,6 +16,20 @@ app.get('/bla', (req, res) => {
     res.send("ALOU");
 });
 
+const Rule = require('./models/Rule');
+app.get('/api/rules', (req, res) => {
+    console.log("Pegando rules...");
+    Rule.find({}).
+        populate('user').
+        exec((err, rules) => {
+            console.log("executou com ", err, rules)
+            if (err)
+                throw err;
+            console.log("got rules", rules);
+            res.send(rules);
+        });
+})
+
 require('./routes/home.js')(app)
 require('./routes/user.js')(app)
 require('./routes/rules.js')(app)
