@@ -1,9 +1,27 @@
-const User = require('../models/User');
+const Rule = require('../models/Rule');
 const bcrypt = require('bcrypt');
 const passport = require('passport');
 const { ensureAuth } = require('../config/auth');
 
 module.exports = (app) => {
+    app.get('/api/userRules', (req, res) => {
+        console.log("Bateu nas rules");
+        if (req.isAuthenticated()) {
+            console.log("User is auth")
+            Rule.find({user: req.user.id})
+                .exec((err, rules) => {
+                    if(err)
+                        throw err;
+                    console.log("got rules", rules);
+                    res.json({rules: rules});
+                } )
+        }
+        else{
+            console.log("User is not auth")
+            res.json([]);
+        }
+    });
+
     app.post('/api/register', (req, res) => {
         console.log("Vai registrar usuario")
         const newUser = new User({
@@ -38,16 +56,6 @@ module.exports = (app) => {
             res.sendStatus(401);
     });
 
-    app.get('/api/user/rules', async (req, res) => {
-        if (req.isAuthenticated()) {
-            const { id } = req.user;
-            const user = await User.findById(id).populate('rules');
-            console.log("got rules", user.rules);
-            res.send(user.rules);
-        }
-        else
-            res.send(null);
-    })
 
     app.get('/api/user', ensureAuth, (req, res) => {
         res.json({user: req.user});

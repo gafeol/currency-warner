@@ -16,13 +16,7 @@ const UserSchema = new mongoose.Schema({
     date: {
         type: Date,
         default: Date.now()
-    },
-    rules: [
-        {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'Rule'
-        }
-    ]
+    }
 })
 
 const User = mongoose.model('User', UserSchema);

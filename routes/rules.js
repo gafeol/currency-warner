@@ -12,7 +12,8 @@ module.exports = (app) => {
                 console.log("got rules", rules);
                 res.send(rules);
             });
-    })
+    });
+    // TODO: Colocar aqui na chamada o username
 
     app.post('/api/rules', ensureAuth, (req, res) => {
         Rule.create(req.body, (err) => {
@@ -22,5 +23,5 @@ module.exports = (app) => {
             }
         })
 
-    })
+    });
 }

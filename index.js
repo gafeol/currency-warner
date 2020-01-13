@@ -4,11 +4,8 @@ const mongoose = require('mongoose');
 const express = require('express');
 const session = require('express-session');
 const passport = require('passport');
-const { ensureAuth } = require('./config/auth');
 
 require('./config/passport')(passport);
-
-
 // Express session
 app.use(session({
     secret: 'papa',
@@ -23,9 +20,6 @@ app.use(passport.session());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.get('/bla', (req, res) => {
-    res.send("ALOU");
-});
 
 require('./routes/home.js')(app)
 require('./routes/user.js')(app)
@@ -38,7 +32,6 @@ if (process.env.NODE_ENV === 'production') {
         res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
     })
 }
-
 
 var dbURI = process.env.dbURI;
 if(!dbURI){

@@ -19,7 +19,7 @@ const Rules = ({user}) => {
 
     useEffect(() => {
         if (rules === null) {
-            axios.get("/api/rules")
+            axios.get("/api/userRules")
                 .then(res => {
                     setRules(res.data);
                 })
@@ -63,7 +63,7 @@ const Rules = ({user}) => {
                         <TextField style={style.TextField}
                             id="thresholdValue"
                             label="warn me when it is less than:"
-                            type={Number}
+                            type="number"
                             onChange={ev => setThreshold(ev.target.value)}>
 
                         </TextField>

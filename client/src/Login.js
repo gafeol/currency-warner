@@ -34,11 +34,9 @@ const Login = (props) => {
 
         axios.post("/api/login", {username, password})
             .then(res => {
-                console.log("Callback do login!");
-                console.log(res);
                 props.history.push('/');
             })
-            .catch(e => console.log("Erro no post do login", e))
+            .catch(e => console.log("Erro no post do login", e));
     }
     
     return (
