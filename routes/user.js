@@ -4,6 +4,7 @@ const passport = require('passport');
 const { ensureAuth } = require('../config/auth');
 
 module.exports = (app) => {
+    // TODO: Por algum motivo nao consigo fazer dois niveis /api/user/rules
     app.get('/api/userRules', (req, res) => {
         console.log("Bateu nas rules");
         if (req.isAuthenticated()) {
