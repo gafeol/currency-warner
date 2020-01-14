@@ -21,7 +21,8 @@ const Rules = ({user}) => {
         if (rules === null) {
             axios.get("/api/userRules")
                 .then(res => {
-                    setRules(res.data);
+                    console.log("Set rules ", res.data.rules);
+                    setRules(res.data.rules);
                 })
                 .catch(err => console.log("Erro pegando rules ", err));
         }
@@ -86,7 +87,12 @@ const Rules = ({user}) => {
                 </form>
             </Box>
             <Box>
-                {JSON.stringify(rules)}
+                {rules ? (rules.map(rule => (
+                   <h1> ALOU RULE {rule.origCurr} pra {rule.destCurr} thres {rule.thresholdValue} </h1>
+                ))) : 
+                null
+                }
+                {/*JSON.stringify(rules)*/}
                 {/* TODO: Melhorar esta pourra de ui */}
             </Box>
         </Box>

@@ -9,7 +9,6 @@ module.exports = (app) => {
             exec((err, rules) => {
                 if (err)
                     throw err;
-                console.log("got rules", rules);
                 res.send(rules);
             });
     });

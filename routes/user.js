@@ -14,8 +14,8 @@ module.exports = (app) => {
                     if(err)
                         throw err;
                     console.log("got rules", rules);
-                    res.json({rules: rules});
-                } )
+                    res.json({rules});
+                })
         }
         else{
             console.log("User is not auth")
