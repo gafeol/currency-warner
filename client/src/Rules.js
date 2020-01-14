@@ -45,7 +45,7 @@ const Rules = ({user}) => {
         <Box>
             <Box>
                 <Typography variant="h4">
-                    Rules for {user ? user.username : "no one"}
+                    {user ? `Your (${user.username}) rules` : "Create a rule:"}
                 </Typography>
                 <form onSubmit={handleRuleCreation}>
                     <Box>
@@ -88,7 +88,7 @@ const Rules = ({user}) => {
             </Box>
             <Box>
                 {rules ? (rules.map(rule => (
-                   <h1> ALOU RULE {rule.origCurr} pra {rule.destCurr} thres {rule.thresholdValue} </h1>
+                   <h1> RULE {rule.origCurr} pra {rule.destCurr} thres {rule.thresholdValue} </h1>
                 ))) : 
                 null
                 }
