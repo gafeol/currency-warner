@@ -88,11 +88,12 @@ const Rules = ({user}) => {
             </Box>
             <Box>
                 {rules ? (rules.map(rule => (
-                   <h1> RULE {rule.origCurr} pra {rule.destCurr} thres {rule.thresholdValue} </h1>
+                    <Typography variant="h6">
+                        Warn me when 1 {rule.origCurr} is cheaper then {rule.thresholdValue} {rule.destCurr}
+                    </Typography>
                 ))) : 
                 null
                 }
-                {/*JSON.stringify(rules)*/}
                 {/* TODO: Melhorar esta pourra de ui */}
             </Box>
         </Box>

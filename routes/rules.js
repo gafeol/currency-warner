@@ -23,4 +23,13 @@ module.exports = (app) => {
         })
 
     });
+
+    app.delete('/api/rules', ensureAuth, (req, res) => {
+        Rule.findByIdAndDelete(req.body.id, (err, res) => {
+            if(err){
+                console.log("error deleting rule");
+                return handleError(err);
+            }
+        })
+    })
 }
