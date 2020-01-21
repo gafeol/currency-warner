@@ -2,6 +2,7 @@ const Rule = require('../models/Rule');
 const bcrypt = require('bcrypt');
 const passport = require('passport');
 const { ensureAuth } = require('../config/auth');
+const User = require('../models/User');
 
 module.exports = (app) => {
     // TODO: Por algum motivo nao consigo fazer dois niveis /api/user/rules

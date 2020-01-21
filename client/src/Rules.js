@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Box, TextField, MenuItem, Button, Typography } from '@material-ui/core';
+import { Box, TextField, MenuItem, Button, Typography, Input } from '@material-ui/core';
 import axios from 'axios';
 import currencies from './currencyData';
 import { checkAuth } from './auth';
@@ -61,13 +61,11 @@ const Rules = ({user}) => {
                                 </MenuItem>
                             ))}
                         </TextField>
-                        <TextField style={style.TextField}
+                        <Input style={style.TextField}
                             id="thresholdValue"
                             label="warn me when it is less than:"
-                            type="number"
                             onChange={ev => setThreshold(ev.target.value)}>
-
-                        </TextField>
+                        </Input>
                         <TextField style={style.TextField}
                             select
                             id="destCurr"
