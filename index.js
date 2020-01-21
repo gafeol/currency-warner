@@ -20,6 +20,7 @@ app.use(passport.session());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+require('./jobs/cron.js')
 
 require('./routes/home.js')(app)
 require('./routes/user.js')(app)

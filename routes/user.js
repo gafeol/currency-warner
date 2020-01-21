@@ -6,25 +6,20 @@ const { ensureAuth } = require('../config/auth');
 module.exports = (app) => {
     // TODO: Por algum motivo nao consigo fazer dois niveis /api/user/rules
     app.get('/api/userRules', (req, res) => {
-        console.log("Bateu nas rules");
         if (req.isAuthenticated()) {
-            console.log("User is auth")
             Rule.find({user: req.user.id})
                 .exec((err, rules) => {
                     if(err)
                         throw err;
-                    console.log("got rules", rules);
                     res.json({rules});
                 })
         }
         else{
-            console.log("User is not auth")
             res.json([]);
         }
     });
 
     app.post('/api/register', (req, res) => {
-        console.log("Vai registrar usuario")
         const newUser = new User({
             username: req.body.username,
             email: req.body.email,
