@@ -1,3 +1,4 @@
 node_modules/
 .idea
-keys.jssendgrid.env
+keys.js
+sendgrid.env
